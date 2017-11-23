@@ -1,10 +1,11 @@
 class Bank
+
+  attr_reader :money
+  attr_accessor :cash_of_game
+
   def initialize
     @money = 100
-  end
-
-  def amount_money
-    @money
+    @cash_of_game = 0
   end
 
   def withdraw_money

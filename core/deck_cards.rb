@@ -1,4 +1,0 @@
-class DeckCards
-
-  CARDS = {}
-end
