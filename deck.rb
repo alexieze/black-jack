@@ -1,18 +1,23 @@
+require_relative 'card'
+
 class Deck
 
-  SUITS = %w(♡ ♧ ♢ ♤).freeze
-  CARDS = %w(2 3 4 5 6 7 8 9 10 J Q K A).freeze
+  attr_reader :deck
+
+  def initialize
+    @deck = self.create
+  end
 
   def create
     deck = []
-    CARDS.each do |card|
-      SUITS.each do |suit|
-        value = card.to_i if card.to_i > 0
-        value = 10 if card.to_i.zero?
-        value = 11 if card == 'A'
-        deck << { value: value, name: card + suit }
-      end
+    Card::SUITS.each do |suit|
+      Card::SIGNS.each { |sign| deck << Card.new(sign, suit) }
     end
     deck.sort_by! { rand }
   end
+
+  def card
+    deck.delete(deck.sample)
+  end
+
 end
