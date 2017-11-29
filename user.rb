@@ -1,38 +1,23 @@
-class User
+require_relative 'hand'
 
-  attr_accessor :money, :skip_step
+class User
+  attr_accessor :money, :skip_step, :hand
   attr_reader :cards
 
   def initialize(name)
     @name = name
     @skip_step = false
     @money = 0
-    @cards = []
     @one_bet = 10
     @show_cards = true
+    @hand = Hand.new
   end
 
   def skiped_step?
     skip_step
   end
 
-  def open_cards
-    @cards.each do |name|
-      puts name
-    end
-  end
 
-  def take_cards(cards)
-    @cards << cards
-  end
-
-  def see_cards
-    if @show_cards
-      @cards.each { |cards| cards.each { |card| puts card[:name] } }
-    else
-      @cards.each { |cards| cards.each { |card| puts ' ... ' } }
-    end
-  end
 
   def make_bet
     if check_money?

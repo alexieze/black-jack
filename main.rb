@@ -1,11 +1,5 @@
-require_relative 'deck'
-require_relative 'hand'
-require_relative 'bank'
-require_relative 'user'
-require_relative 'player'
-require_relative 'diller'
-require_relative 'game'
+require_relative 'interface'
 
+interface = Interface.new
 
-game = Game.new
-game.init
+interface.game_init

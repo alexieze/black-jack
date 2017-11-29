@@ -2,13 +2,17 @@ class Player < User
 
   def initialize(name)
     super(name)
-    @show_cards = true
+    @show_cards = false
   end
 
-  def next_step(hand)
-    puts 'Вы можете пропустить ход либо взять еще одну карту else/skip'
-    next_step = gets.chomp.to_s
-    if next_step 'else'
+  def move(command)
+    begin
+      skip_step(true) if command == 'skip'
+      hand.take_card if command == 'take'
+      @shop_cards = true if command == 'open'
+    rescue RuntimeError => e
+      puts e.message
+      retry
     end
   end
 end

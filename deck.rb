@@ -10,8 +10,11 @@ class Deck
 
   def create
     deck = []
-    Card::SUITS.each do |suit|
-      Card::SIGNS.each { |sign| deck << Card.new(sign, suit) }
+    Card::SIGNS.each do |sign|
+      sign_value = sign if sign =~ /\d/
+      sign_value = 10  if sign =~ /\w/i
+      sign_value = 11 if sign == 'A'
+      Card::SUITS.each { |suit| deck << Card.new(sign_value, sign + suit) }
     end
     deck.sort_by! { rand }
   end
