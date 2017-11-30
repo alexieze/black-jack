@@ -16,7 +16,7 @@ class User
     @open_cards
   end
 
-  def skiped_step?
+  def skipped_step?
     skip_step
   end
 
@@ -29,6 +29,10 @@ class User
 
   def check_money?
     @money >= 10
+  end
+
+  def card_info
+    @hand.cards.each { |card| card }
   end
 
 end

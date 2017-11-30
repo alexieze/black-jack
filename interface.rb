@@ -25,19 +25,27 @@ class Interface
 
   def round
     loop do
-      game.player.card_info.each { |card | puts card.sign }
+      see_cards(game.player)
       game.player.move(command)
-      break if game.player.show_cards? || game.player.hand.full
+      see_cards(game.player)
+
+      break if game.player.open_cards? # || game.player.hand.full
       game.diller.move
-      break if game.diller.show_cards? || game.diller.hand.full
+      see_cards(game.diller)
+      break
+      break if game.diller.open_cards? #|| game.diller.hand.full
     end
     game.result
+  end
+
+  def see_cards(user)
+    user.card_info.each { |card | puts card.sign }
   end
 
   def game_new
     puts 'Ееще играть yes/no'
     input = gets.chomp.to_s
-    break until input == 'yes'
+    break unless input == 'yes'
   end
 
   def command

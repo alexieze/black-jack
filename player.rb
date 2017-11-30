@@ -16,8 +16,4 @@ class Player < User
       retry
     end
   end
-
-  def card_info
-    @hand.cards.each { |card| card }
-  end
 end
