@@ -13,11 +13,25 @@ class Interface
 
 
   def game_init
-    puts game.round { command }
-    # loop do
-    #
-    #   game_new if game.over?
-    # end
+    loop do
+      game.giving_away_money
+      game.make_bet
+      game.giving_away_cards
+      round
+      break
+      game_new if game.over?
+    end
+  end
+
+  def round
+    loop do
+      game.player.card_info.each { |card | puts card.sign }
+      game.player.move(command)
+      break if game.player.show_cards? || game.player.hand.full
+      game.diller.move
+      break if game.diller.show_cards? || game.diller.hand.full
+    end
+    game.result
   end
 
   def game_new
@@ -28,6 +42,6 @@ class Interface
 
   def command
     puts 'Введите команду skip/take/open'
-    game.command = gets.chomp.to_s
+    gets.chomp.to_s
   end
 end

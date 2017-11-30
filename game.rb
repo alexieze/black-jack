@@ -13,20 +13,6 @@ class Game
     @money = 0
   end
 
-  def round
-    giving_away_money
-    make_bet
-    giving_away_cards
-    loop do
-      @player.move(yield)
-      break if @player.show_cards || @player.hand.full
-      @diller.move
-      break if @diller.show_cards || @diller.hand.full
-    end
-    result
-  end
-
-
 
   def giving_away_cards
     2.times { @player.hand.take_card }
