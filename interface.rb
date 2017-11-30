@@ -13,7 +13,7 @@ class Interface
 
 
   def game_init
-    puts game.round
+    puts game.round { command }
     # loop do
     #
     #   game_new if game.over?
@@ -23,7 +23,7 @@ class Interface
   def game_new
     puts 'Ееще играть yes/no'
     input = gets.chomp.to_s
-    break unless input == 'yes'
+    break until input == 'yes'
   end
 
   def command

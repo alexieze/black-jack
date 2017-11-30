@@ -12,7 +12,7 @@ class Hand
     @cards << @deck.card
   end
 
-  def is_full?
+  def full?
     @cards.length >= 3
   end
 end

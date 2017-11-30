@@ -1,4 +1,6 @@
-
+require_relative 'player'
+require_relative 'diller'
+require_relative 'bank'
 
 class Game
 
@@ -12,29 +14,24 @@ class Game
     @money = 0
   end
 
-
-  def started?
-
-  end
-
   def round
     giving_away_money
     make_bet
-    2.times { @player.hand.take_card }
-    2.times { @diller.hand.take_card }
-    @player.move(command)
-    #break if @player.open_cards
-    @diller.move
-    # loop do
-    #   @player.move(command)
-    #   break if @player.open_cards
-    #   @diller.move
-    # end
-    # result
+    giving_away_cards
+    loop do
+      @player.move(yield)
+      break if @player.open_cards || @player.hand.full
+      @diller.move
+      break if @diller.open_cards || @diller.hand.full
+    end
+    result
   end
 
-  def open_cards
 
+
+  def giving_away_cards
+    2.times { @player.hand.take_card }
+    2.times { @diller.hand.take_card }
   end
 
   def result
