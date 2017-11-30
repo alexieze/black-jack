@@ -5,7 +5,6 @@ require_relative 'bank'
 class Game
 
   attr_reader :bank, :player, :diller
-  attr_accessor :command
 
   def initialize(name)
     @player = Player.new(name)
@@ -20,9 +19,9 @@ class Game
     giving_away_cards
     loop do
       @player.move(yield)
-      break if @player.open_cards || @player.hand.full
+      break if @player.show_cards || @player.hand.full
       @diller.move
-      break if @diller.open_cards || @diller.hand.full
+      break if @diller.show_cards || @diller.hand.full
     end
     result
   end
