@@ -6,7 +6,6 @@ class Diller < User
   end
 
   def move
-    puts hand.sum_points
     if hand.sum_points == 21
       self.open_cards = true if !self.open_cards?
     elsif hand.sum_points >= 18 && !skipped_step?
