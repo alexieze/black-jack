@@ -2,6 +2,7 @@ require_relative 'hand'
 
 class User
   attr_accessor :money, :skip_step, :hand, :open_cards
+  attr_reader :name
 
   def initialize(name)
     @name = name

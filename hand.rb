@@ -20,8 +20,11 @@ class Hand
   end
 
   def sum_points
-    @cards.each { |card| @points += card.value }
+    summ = 0
+    @cards.each { |card | summ += card.value }
+    @points = summ
     ace
+    @points
   end
 
   def ace

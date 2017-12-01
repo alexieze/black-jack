@@ -19,23 +19,31 @@ class Interface
       game.giving_away_cards
       round
       break
-      game_new if game.over?
+      if game.over?
+        if !game_new
+          break
+        end
+      end
     end
   end
 
   def round
+    i = 1
     loop do
       see_cards(game.player)
       game.player.move(command)
-      see_cards(game.player)
-
-      break if game.player.open_cards? # || game.player.hand.full
+      #see_cards(game.player)
+      break if game.player.open_cards? || (game.player.hand.full? && i > 1)
       game.diller.move
-      see_cards(game.diller)
       break
-      break if game.diller.open_cards? #|| game.diller.hand.full
+      break if game.diller.open_cards? || game.diller.hand.full?
+      i = i + 1
     end
-    game.result
+    #puts 'Результат игрока ====================='
+    #see_cards(game.player)
+    #puts 'Результат диллера ====================='
+    #see_cards(game.diller)
+    puts game.result
   end
 
   def see_cards(user)
@@ -45,7 +53,6 @@ class Interface
   def game_new
     puts 'Ееще играть yes/no'
     input = gets.chomp.to_s
-    break unless input == 'yes'
   end
 
   def command
